@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Autoplay Video</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      height: 100%;
+    }
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      pointer-events: none; /* Prevent interaction */
+    }
+  </style>
+</head>
+<body>
+  <video id="backgroundVideo" autoplay loop muted playsinline></video>
+
+  <script>
+    const video = document.getElementById('backgroundVideo');
+    video.src = 'video.mp4'; // Replace with your video file name
+    video.load();
+
+    // Attempt to unmute and play with sound (may be blocked by browser)
+    video.muted = false;
+
+    video.play().then(() => {
+      console.log('Video started with sound.');
+    }).catch(err => {
+      console.warn('Autoplay with sound blocked:', err);
+    });
+  </script>
+</body>
+  </html>
