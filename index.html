@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ad Click & Withdraw</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f2f2f2;
+    }
+    header {
+      background: #fff;
+      padding: 10px;
+      text-align: center;
+      border-bottom: 2px solid #ccc;
+      position: relative;
+    }
+    header img {
+      max-width: 100%;
+      height: auto;
+    }
+    .points {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      background: #e1ffd6;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid green;
+    }
+    .container {
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+    .input-box {
+      margin-bottom: 15px;
+    }
+    .input-box label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .input-box input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button.withdraw-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .ads-section {
+      text-align: center;
+    }
+    .ads-section button {
+      margin: 10px 5px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #2196F3;
+      color: white;
+    }
+    .ads-section button.clicked {
+      background-color: #9e9e9e;
+      cursor: not-allowed;
+    }
+    .message {
+      text-align: center;
+      margin-bottom: 15px;
+      font-weight: bold;
+      color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="your-project-banner.jpg" alt="Project Banner" />
+    <div class="points">Points: <span id="points">0</span></div>
+  </header>
+
+  <div class="container">
+    <div class="message" id="message"></div>
+
+    <div class="input-box">
+      <label>Enter your Easypaisa/Jazzcash number</label>
+      <input type="number" inputmode="numeric" placeholder="03XXXXXXXXX" id="phone" />
+    </div>
+
+    <div class="input-box">
+      <label>Enter withdrawal amount</label>
+      <input type="number" inputmode="numeric" placeholder="Enter Amount" id="amount" />
+    </div>
+
+    <div style="margin-bottom: 10px; font-weight: bold;">
+      Minimum withdrawal 1500 RS
+    </div>
+
+    <button class="withdraw-btn" onclick="withdraw()">Withdraw</button>
+
+    <div class="ads-section" id="ads">
+      <!-- Ad buttons will be generated here -->
+    </div>
+  </div>
+
+  <script>
+    let totalPoints = 0;
+    let buttonsClicked = [false, false, false, false, false];
+
+    const pointsDisplay = document.getElementById("points");
+    const adsContainer = document.getElementById("ads");
+    const messageBox = document.getElementById("message");
+
+    // Load points from localStorage
+    if (localStorage.getItem("totalPoints")) {
+      totalPoints = parseInt(localStorage.getItem("totalPoints"));
+    }
+
+    updatePoints();
+
+    function createButtons() {
+      adsContainer.innerHTML = "";
+      for (let i = 0; i < 5; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = buttonsClicked[i] ? "Clicked" : "Watch Ad 10 RS";
+        btn.disabled = buttonsClicked[i];
+        btn.classList.toggle("clicked", buttonsClicked[i]);
+        btn.addEventListener("click", () => handleClick(i, btn));
+        adsContainer.appendChild(btn);
+      }
+    }
+
+    function handleClick(index, btn) {
+      if (!buttonsClicked[index]) {
+        buttonsClicked[index] = true;
+        totalPoints += 10;
+        savePoints();
+        updatePoints();
+        createButtons();
+
+        if (buttonsClicked.every(v => v === true)) {
+          setTimeout(() => {
+            buttonsClicked = [false, false, false, false, false];
+            createButtons();
+          }, 500);
+        }
+      }
+    }
+
+    function updatePoints() {
+      pointsDisplay.textContent = totalPoints;
+    }
+
+    function savePoints() {
+      localStorage.setItem("totalPoints", totalPoints);
+    }
+
+    function showMessage(text, success = false) {
+      messageBox.style.color = success ? 'green' : '#d32f2f';
+      messageBox.textContent = text;
+      setTimeout(() => {
+        messageBox.textContent = "";
+      }, 5000);
+    }
+
+    function withdraw() {
+      const phone = document.getElementById("phone").value.trim();
+      const amount = parseInt(document.getElementById("amount").value.trim());
+
+      if (!phone || !amount) {
+        showMessage("Please enter all details");
+        return;
+      }
+
+      if (totalPoints < 1500) {
+        showMessage("Minimum withdrawal 1500 RS");
+        return;
+      }
+
+      if (amount > totalPoints) {
+        showMessage("You don't have enough points");
+        return;
+      }
+
+      totalPoints -= amount;
+      savePoints();
+      updatePoints();
+      showMessage("Withdraw successful!", true);
+    }
+
+    createButtons();
+  </script>
+</body>
+</html>
