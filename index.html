@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ad Click & Withdraw</title>
+  <title>Click to Earn</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -137,7 +137,7 @@
       adsContainer.innerHTML = "";
       for (let i = 0; i < 5; i++) {
         const btn = document.createElement("button");
-        btn.textContent = buttonsClicked[i] ? "Clicked" : "Watch Ad 10 RS";
+        btn.textContent = buttonsClicked[i] ? "Clicked" : "Click and get 10 RS";
         btn.disabled = buttonsClicked[i];
         btn.classList.toggle("clicked", buttonsClicked[i]);
         btn.addEventListener("click", () => handleClick(i, btn));
