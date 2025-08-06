@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b:blog xmlns:b="http://www.google.com/2005/gml/b" version="2">
+
+  <b:skin><![CDATA[
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fa;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
+    header, nav, footer {
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #222;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+      overflow: hidden;
+    }
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 0 0 0.5rem;
+    }
+    .card-description {
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 1rem;
+    }
+    .card-category {
+      background: #0073e6;
+      color: white;
+      font-size: 0.8rem;
+      padding: 2px 6px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .join-button {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      border-radius: 4px;
+    }
+    .post img {
+      width: 100%;
+      border-radius: 6px;
+    }
+    .post-content {
+      padding: 1rem;
+    }
+    .join-now {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      font-size: 1rem;
+      border-radius: 4px;
+      margin-top: 1rem;
+    }
+    @media (max-width: 768px) {
+      .card {
+        width: 100%;
+      }
+    }
+  ]]></b:skin>
+
+  <b:template-skin>default</b:template-skin>
+
+  <!-- Header -->
+  <b:section id="header" class="header">
+    <b:widget id="Header1" type="Header" version="1" />
+  </b:section>
+
+  <!-- Navigation Menu -->
+  <b:section id="pages" class="nav">
+    <b:widget id="PageList1" type="PageList" version="2">
+      <b:widget-settings>
+        <b:widget-setting name="home_text">Home</b:widget-setting>
+        <b:widget-setting name="display_home">true</b:widget-setting>
+      </b:widget-settings>
+    </b:widget>
+  </b:section>
+
+  <!-- Posts Grid Section -->
+  <b:section id="main" class="main">
+    <b:widget id="Blog1" type="Blog" version="2">
+      <b:includable id="main">
+        <div class="card-grid">
+          <b:loop values='data:posts' var='post'>
+            <div class="card">
+              <a expr:href='data:post.url'>
+                <img expr:src='data:post.thumbnailUrl' alt="Airdrop Image" />
+              </a>
+              <div class="card-content">
+                <div class="card-category"><data:post.labels/></div>
+                <div class="card-title">
+                  <a expr:href='data:post.url'><data:post.title/></a>
+                </div>
+                <div class="card-description"><data:post.snippet/></div>
+                <a expr:href='data:post.url' class="join-button">Join Airdrop</a>
+              </div>
+            </div>
+          </b:loop>
+        </div>
+      </b:includable>
+    </b:widget>
+  </b:section>
+
+  <!-- Footer -->
+  <b:section id="footer" class="footer">
+    <b:widget id="Footer1" type="Text" version="1">
+      <b:widget-settings>
+        <b:widget-setting name="content">© 2025 Airdrops Blog – All Rights Reserved.</b:widget-setting>
+      </b:widget-settings>
+    </b:widget>
+  </b:section>
+
+</b:blog>
