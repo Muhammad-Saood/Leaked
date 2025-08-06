@@ -123,14 +123,18 @@
           <b:loop values='data:posts' var='post'>
             <div class="card">
               <a expr:href='data:post.url'>
-                <img expr:src='data:post.thumbnailUrl' alt="Airdrop Image" />
+                <b:if cond='data:post.featuredImage'>
+                  <img expr:src='data:post.featuredImage' alt='Airdrop Image' />
+                </b:if>
               </a>
               <div class="card-content">
                 <div class="card-category"><data:post.labels/></div>
                 <div class="card-title">
                   <a expr:href='data:post.url'><data:post.title/></a>
                 </div>
-                <div class="card-description"><data:post.snippet/></div>
+                <div class="card-description">
+                  <b:eval expr='data:post.body.substring(0, 150)'/>
+                </div>
                 <a expr:href='data:post.url' class="join-button">Join Airdrop</a>
               </div>
             </div>
