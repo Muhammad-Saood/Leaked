@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3'
+      b:responsive='true' b:templateVersion='1.0.0'
+      xmlns='http://www.w3.org/1999/xhtml'
+      xmlns:b='http://www.google.com/2005/gml/b'
+      xmlns:data='http://www.google.com/2005/gml/data'
+      xmlns:expr='http://www.google.com/2005/gml/expr'>
+  <head>
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+    <title><data:blog.pageTitle/></title>
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap' rel='stylesheet'/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css' rel='stylesheet'/>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: #f5f7fa;
+        color: #333;
+      }
+      a {
+        color: #0d6efd;
+        text-decoration: none;
+      }
+      header {
+        background: #0d6efd;
+        color: white;
+        padding: 1rem 2rem;
+      }
+      header h1 {
+        margin: 0;
+      }
+.container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+      .card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+      .card h2 {
+        font-size: 1.2rem;
+        margin: 0.75rem 0 0.5rem;
+      }
+      .card p {
+        flex-grow: 1;
+        font-size: 14px;
+        color: #555;
+      }
+      .card a.button {
+        margin-top: 1rem;
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: #0d6efd;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Airdrops Portal</h1>
+    </header>
+    <b:if cond='data:blog.pageType == &quot;index&quot;'>
+      <div class="container">
+        <b:loop values='data:posts' var='post'>
+          <div class="card">
+            <a expr:href='data:post.url'>
+              <img expr:src='data:post.featuredImage' alt='Post image'/>
+            </a>
+            <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
+            <p><data:post.snippet/></p>
+<b:if cond='data:post.labels'>
+              <b:loop values='data:post.labels' var='label'>
+                <b:if cond='label.name contains &quot;http&quot;'>
+                  <a class="button" expr:href='label.name' target='_blank'>Join</a>
+                </b:if>
+              </b:loop>
+            </b:if>
+          </div>
+        </b:loop>
+      </div>
+    </b:if>
+
+    <b:if cond='data:blog.pageType == &quot;item&quot;'>
+      <div class="post-detail" style="max-width:800px; margin:auto; padding:2rem;">
+        <article>
+          <h1><data:post.title/></h1>
+          <img expr:src='data:post.featuredImage' alt='Post image' style='width:100%; border-radius:10px; margin-bottom:20px;'/>
+          <div class="post-body">
+            <data:post.body/>
+          </div>
+          <b:if cond='data:post.labels'>
+            <b:loop values='data:post.labels' var='label'>
+              <b:if cond='label.name contains &quot;http&quot;'>
+                <a class="button" expr:href='label.name' target='_blank'>Join Airdrop</a>
+              </b:if>
+            </b:loop>
+          </b:if>
+        </article>
+      </div>
+    </b:if>
+<footer class="site-footer" style="background:#151a25; color:white; padding:1rem; text-align:center; margin-top:40px;">
+      <p>© <data:blog.title/> - All rights reserved.</p>
+    </footer>
+  </body>
+</html>
