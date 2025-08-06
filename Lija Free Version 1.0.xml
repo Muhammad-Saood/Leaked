@@ -12,7 +12,7 @@ Blogger Template Style
 Name:        Lija
 License:     Free Version
 Version:     1.0
-Author:      Way2Themes
+Author:      gfjjjb
 Author Url:  https://www.way2themes.com/
 ----------------------------------------------- */
 
@@ -6249,4 +6249,5 @@ $("#main-wrapper").each(function() {
 <!-- Overlay and Back To Top --> 
   <div class='back-top' title='Back to Top'/>
 </body>
+
 </html>
