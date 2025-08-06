@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b:blog xmlns:b="http://www.google.com/2005/gml/b" version="2">
+
+  <b:skin><![CDATA[
+    body {
+      font-family: 'Noto Nastaliq Urdu', serif;
+      direction: rtl;
+      background-color: #fff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+    header, nav, footer {
+      text-align: center;
+      padding: 1rem;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      background-color: #111;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .post {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      border-bottom: 1px solid #ddd;
+      padding: 1rem;
+    }
+    .post img {
+      width: 120px;
+      height: auto;
+      object-fit: cover;
+    }
+    .post-body {
+      flex: 1;
+    }
+    .post-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 0.2rem;
+    }
+    .post-date {
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 0.5rem;
+    }
+    .post-snippet {
+      font-size: 1rem;
+      color: #444;
+    }
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      .post {
+        flex-direction: column;
+      }
+      .post img {
+        width: 100%;
+      }
+    }
+  ]]></b:skin>
+
+  <b:template-skin>default</b:template-skin>
+
+  <!-- Header -->
+  <b:section id="header" class="header">
+    <b:widget id="Header1" type="Header" version="1" />
+  </b:section>
+
+  <!-- Navigation Menu -->
+  <b:section id="pages" class="nav">
+    <b:widget id="PageList1" type="PageList" version="2">
+      <b:widget-settings>
+        <b:widget-setting name="home_text">صفحۂ اول</b:widget-setting>
+        <b:widget-setting name="display_home">true</b:widget-setting>
+      </b:widget-settings>
+    </b:widget>
+  </b:section>
+
+  <!-- Main Posts Section -->
+  <b:section id="main" class="main">
+    <b:widget id="Blog1" type="Blog" version="2" />
+  </b:section>
+
+  <!-- Footer -->
+  <b:section id="footer" class="footer">
+    <b:widget id="Footer1" type="Text" version="1">
+      <b:widget-settings>
+        <b:widget-setting name="content">© 2025 NewsPlus - All rights reserved.</b:widget-setting>
+      </b:widget-settings>
+    </b:widget>
+  </b:section>
+
+</b:blog>
